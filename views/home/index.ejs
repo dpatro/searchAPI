@@ -19,12 +19,17 @@
       // Add in a full set of searchers
       // var localSearch = new google.search.LocalSearch();
       // searchControl.addSearcher(localSearch);
-      searchControl.addSearcher(new google.search.WebSearch());
-      searchControl.addSearcher(new google.search.VideoSearch());
-      searchControl.addSearcher(new google.search.BlogSearch());
-      searchControl.addSearcher(new google.search.NewsSearch());
-      searchControl.addSearcher(new google.search.ImageSearch());
-      searchControl.addSearcher(new google.search.BookSearch());
+
+      var options = new google.search.SearcherOptions();
+      options.setExpandMode(google.search.SearchControl.EXPAND_MODE_OPEN);
+      options.setRoot(document.getElementById("resultsSection"));
+      
+      searchControl.addSearcher(new google.search.WebSearch(), options);
+      searchControl.addSearcher(new google.search.VideoSearch(), options);
+      searchControl.addSearcher(new google.search.BlogSearch(), options);
+      searchControl.addSearcher(new google.search.NewsSearch()), options;
+      searchControl.addSearcher(new google.search.ImageSearch(), options);
+      searchControl.addSearcher(new google.search.BookSearch(), options);
       // searchControl.addSearcher(new google.search.PatentSearch());
 
       // Set the Local Search center point
@@ -32,6 +37,8 @@
 
       // create a drawOptions object
       var drawOptions = new google.search.DrawOptions();
+
+      drawOptions.setSearchFormRoot(document.getElementById("searchForm"));
 
       // tell the searcher to draw itself in linear mode
       drawOptions.setDrawMode(google.search.SearchControl.DRAW_MODE_TABBED);
@@ -49,31 +56,13 @@
   </head>
 
   <body>
-    <div id="searchcontrol" style="margin-left:50px;">
-        Loading
-        <div class="gs-result gs-webResult">
-            <!-- Note, a.gs-title can have embedded HTML
-            // so make sure to account for this in your rules.
-            // For instance, to change the title color to red,
-            // use a rule like this:
-            // a.gs-title, a.gs-title * { color : red; }
-            -->
-            <div class="gs-title">
-            <a class="gs-title"></a>
-            </div>
-            <div class="gs-snippet"></div>
 
-            <!-- The default CSS rule has the -short URL visible and
-            // the -long URL hidden.
-            //
-            // If you want to reverse this, use a rule like:
-            // #mycontrol .gs-webResult .gs-visibleUrl-short { display:none; }
-            // #mycontrol .gs-webResult .gs-visibleUrl-long { display:block; }
-            -->
-            <div class="gs-visibleUrl gs-visibleUrl-short"></div>
-            <div class="gs-visibleUrl gs-visibleUrl-long"></div>
-        </div>
-    </div>
+    <div id="searchForm" style="margin:5px; padding: 5px; border:1px solid gray;"></div>
+
+    <div id="searchcontrol" style="margin:5px; padding: 5px;"> Loading </div>
+
+    <div id="resultsSection" style="margin:5px; padding: 5px; border:1px solid gray;"></div>
+
   </body>
 
 </html>
