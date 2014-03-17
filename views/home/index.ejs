@@ -1,68 +1,16 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<script>
+function fetchResults()
+{
+    var query = document.getElementById("searchQuery").value;
+    alert(query);
+}
+</script>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<div id="searchForm" style="margin:5px; padding:2px; border: 1px solid gray;">
+    <input id="searchQuery" name="query"/>
+    <button type="button" onclick="fetchResults()">Submit</button>
+</div>
 
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
-    <title>Hello World - Google  Web Search API Sample</title>
-    <script src="https://www.google.com/jsapi"
-        type="text/javascript"></script>
-    <script language="Javascript" type="text/javascript">
-    //<!
-    google.load('search', '1');
+<div id="statusSection" style="margin:5px;padding:2px; border: 1px solid gray;">Waiting for Search</div>
 
-    function OnLoad() {
-      // Create a search control
-      var searchControl = new google.search.SearchControl();
-
-      // Add in a full set of searchers
-      // var localSearch = new google.search.LocalSearch();
-      // searchControl.addSearcher(localSearch);
-
-      var options = new google.search.SearcherOptions();
-      options.setExpandMode(google.search.SearchControl.EXPAND_MODE_OPEN);
-      options.setRoot(document.getElementById("resultsSection"));
-      
-      searchControl.addSearcher(new google.search.WebSearch(), options);
-      searchControl.addSearcher(new google.search.VideoSearch(), options);
-      searchControl.addSearcher(new google.search.BlogSearch(), options);
-      searchControl.addSearcher(new google.search.NewsSearch()), options;
-      searchControl.addSearcher(new google.search.ImageSearch(), options);
-      searchControl.addSearcher(new google.search.BookSearch(), options);
-      // searchControl.addSearcher(new google.search.PatentSearch());
-
-      // Set the Local Search center point
-      // localSearch.setCenterPoint("New York, NY");
-
-      // create a drawOptions object
-      var drawOptions = new google.search.DrawOptions();
-
-      drawOptions.setSearchFormRoot(document.getElementById("searchForm"));
-
-      // tell the searcher to draw itself in linear mode
-      drawOptions.setDrawMode(google.search.SearchControl.DRAW_MODE_TABBED);
-      
-      // tell the searcher to draw itself and tell it where to attach
-      searchControl.draw(document.getElementById("searchcontrol"), drawOptions);
-
-      // execute an inital search
-      searchControl.execute("Computer Science");
-    }
-    google.setOnLoadCallback(OnLoad);
-
-    //]]>
-    </script>
-  </head>
-
-  <body>
-
-    <div id="searchForm" style="margin:5px; padding: 5px; border:1px solid gray;"></div>
-
-    <div id="searchcontrol" style="margin:5px; padding: 5px;"> Loading </div>
-
-    <div id="resultsSection" style="margin:5px; padding: 5px; border:1px solid gray;"></div>
-
-  </body>
-
-</html>
+<div id="blogsResults" style="margin:5px; padding:2px; border: 1px solid gray;">Waiting for Search</div>
