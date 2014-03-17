@@ -1,36 +1,8 @@
 <script>
 function fetchResults()
 {
-    var webAPI = "https://ajax.googleapis.com/ajax/services/search/web?v=1.0&q=";
     var query = document.getElementById("searchQuery").value;
-    
-    var xhr;
-    if (window.xhrRequest)
-    {// code for IE7+, Firefox, Chrome, Opera, Safari
-        xhr=new xhrRequest();
-    }
-    else
-    {// code for IE6, IE5
-        xhr=new ActiveXObject("Microsoft.xhr");
-    }
-    xhr.onreadystatechange=function()
-    {
-        if (xhr.readyState==4 && xhr.status==200)
-        {
-            console.log(xhr)
-            document.getElementById("statusSection").innerHTML=xhr.responseText;
-        }
-        else
-        {
-            document.getElementById("statusSection").innerHTML="<p> Load failed! </p>";
-        }
-    }
-    
-    xhr.open("GET", webAPI+query,true);
-    
-    xhr.setRequestHeader("user-agent", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/30.0.1599.114 Chrome/30.0.1599.114 Safari/537.36");
-    
-    xhr.send();
+    alert(query);
 }
 </script>
 
@@ -41,4 +13,4 @@ function fetchResults()
 
 <div id="statusSection" style="margin:5px;padding:2px; border: 1px solid gray;">Waiting for Search</div>
 
-<div id="webResults" style="margin:5px; padding:2px; border: 1px solid gray;">Waiting for Search</div>
+<div id="blogsResults" style="margin:5px; padding:2px; border: 1px solid gray;">Waiting for Search</div>
