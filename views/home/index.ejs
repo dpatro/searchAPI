@@ -1,48 +1,44 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <script>
-    function fetchResults()
+<script>
+function fetchResults()
+{
+    var webAPI = "https://ajax.googleapis.com/ajax/services/search/web?v=1.0&q=";
+    var query = document.getElementById("searchQuery").value;
+    
+    var xhr;
+    if (window.xhrRequest)
+    {// code for IE7+, Firefox, Chrome, Opera, Safari
+        xhr=new xhrRequest();
+    }
+    else
+    {// code for IE6, IE5
+        xhr=new ActiveXObject("Microsoft.xhr");
+    }
+    xhr.onreadystatechange=function()
     {
-        var xmlhttp;
-        if (window.XMLHttpRequest)
-        {// code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp=new XMLHttpRequest();
+        if (xhr.readyState==4 && xhr.status==200)
+        {
+            console.log(xhr)
+            document.getElementById("statusSection").innerHTML=xhr.responseText;
         }
         else
-        {// code for IE6, IE5
-            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange=function()
         {
-            if (xmlhttp.readyState==4 && xmlhttp.status==200)
-            {
-                document.getElementById("myDiv2").innerHTML=xmlhttp.responseText;
-            }
-            else
-            {
-                document.getElementById("myDiv2").innerHTML="<p> Load failed! </p>";
-            }
+            document.getElementById("statusSection").innerHTML="<p> Load failed! </p>";
         }
-        xmlhttp.open("GET","ajax_info.txt",true);
-        xmlhttp.send();
     }
-    </script>
-</head>
+    
+    xhr.open("GET", webAPI+query,true);
+    
+    xhr.setRequestHeader("user-agent", "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/30.0.1599.114 Chrome/30.0.1599.114 Safari/537.36");
+    
+    xhr.send();
+}
+</script>
 
-<body>
+<div id="searchForm" style="margin:5px; padding:2px; border: 1px solid gray;">
+    <input id="searchQuery" name="query"/>
+    <button type="button" onclick="fetchResults()">Submit</button>
+</div>
 
-    <form id="submitForm" method="post">
-    <div class="wrapper">
-    <div class="field">
-    <input name="search" id="search" />
-    </div><br />
-    <input id="button1" type="submit" value="Submit" class="submit" onclick="();" /><br />
-    </div>
-    <div id="searchContainer">
-    </div>
-    </form>
+<div id="statusSection" style="margin:5px;padding:2px; border: 1px solid gray;">Waiting for Search</div>
 
-</body>
-</html>
+<div id="webResults" style="margin:5px; padding:2px; border: 1px solid gray;">Waiting for Search</div>
