@@ -1,0 +1,2 @@
+# searchAPI
+### a Sails application
